@@ -8,4 +8,9 @@ python3 bot.py #start bot
 
 
 
-up to: https://www.youtube.com/watch?v=RejwzqK6dJI
+<!-- #make sure virtual env is activated so you are not installing it across entire system -->
+pip install hikari-lightbulb
+
+Referred to videos in the following series:
+https://www.youtube.com/watch?v=RejwzqK6dJI
+
