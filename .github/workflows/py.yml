@@ -1,0 +1,25 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: make ssh dir
+      run: mkdir ~/.ssh/
+    - name: pass in ssh private key
+      run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+    - name: start ssh agent & add ssh key to ssh agent
+      run: eval $(ssh-agent -s) && chmod 400 ~/.ssh/id_rsa && ssh-add ~/.ssh/id_rsa
+      
+    - name: build docker image 1 
+      run: eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa && cd docker-images/env-cpp && ./build.sh
+
+    - name: build docker image 2
+      run: eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa && cd docker-images/ssh-in-docker && ./build.sh
+      # run: cd docker-images/ssh-in-docker && ./build.sh

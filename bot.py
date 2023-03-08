@@ -1,8 +1,10 @@
 import os
-import hikari
-import lightbulb
+from typing import Optional
 from dotenv import load_dotenv
 
+import hikari
+import lightbulb
+from hikari import Intents
 
 # Load environment variables from .env file
 load_dotenv()
@@ -10,10 +12,14 @@ load_dotenv()
 # Access environment variables using os.environ.get()
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
 
-# bot = hikari.GatewayBot(token='<TOKEN>')
+INTENTS = Intents.GUILD_MEMBERS | Intents.GUILDS
+
 bot = lightbulb.BotApp(
     token = BOT_TOKEN,
-    default_enabled_guilds=(997729114968555540, 486517628404498432)) # register commands only to specified guild (discord server)
+    intents=INTENTS,
+    banner=None,
+    default_enabled_guilds = 997729114968555540
+)
 
 # token taken from https://discord.com/developers/applications/997331587966447678/bot
 
@@ -21,15 +27,41 @@ bot = lightbulb.BotApp(
 async def bot_started(event): # function header
     print('Bot has started')
 
+#--- Automatic messages when users join and leave server
+@bot.listen(hikari.MemberCreateEvent)
+async def on_group_join(event):
+    print(f'{event.member} has joined the toke space.')
+# @bot.listen()
+# def on_group_join(event: hikari.MemberCreateEvent):
+#     print(f'{event.member} has joined the toke space.')
+
+@bot.listen(hikari.MemberDeleteEvent)
+async def on_group_remove(event):
+    print(f'{event.member} has left the toke space.')
+
+
+@bot.listen()
+async def print_message(event: hikari.GuildMessageCreateEvent) -> None:
+    if event.content == "!ping":
+        print(event.message.content)
 #----------------------------
 # Slash Commands
 #----------------------------
 # order in which these appear above funciton header is important
-# @bot.command
-# @lightbulb.command('ping','Says pong!')
-# @lightbulb.implements(lightbulb.SlashCommand)
+"""
+Using `ctx` vx `ctx: lightbulb.Context` as an argument name.
+ctx: lightbulb.Context specifies the type of the argument as 
+lightbulb.Context. This is a type hint that tells the Python 
+interpreter that the ctx argument should be an instance of
+the lightbulb.Context class. 
+"""
+@bot.command
+@lightbulb.command('ping','Says pong!')
+@lightbulb.implements(lightbulb.SlashCommand)
 # async def ping(ctx): # ctx short for context
-#     await ctx.respond('Pong!')
+async def ping(ctx: lightbulb.Context) -> None:
+    await ctx.respond(f'Pong! Latency: {bot.heartbeat_latency * 1000:.2f}ms.')
+    
 
 @bot.command
 @lightbulb.command('group', 'This is a group')
@@ -64,7 +96,7 @@ bot.load_extensions_from('./extensions')
 
 
 
+# if __name__ == "__main__":
 bot.run()
-
 
 
