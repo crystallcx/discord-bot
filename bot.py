@@ -2,12 +2,9 @@ import hikari
 import lightbulb
 import os
 
-# Access the value of your secret through an environment variable
-my_secret = os.environ.get('BOT_TOKEN')
-
 # bot = hikari.GatewayBot(token='<TOKEN>')
 bot = lightbulb.BotApp(
-    token = my_secret,
+    token = <BOT_TOKEN>,
     default_enabled_guilds=(997729114968555540, 486517628404498432)) # register commands only to specified guild (discord server)
 
 # token taken from https://discord.com/developers/applications/997331587966447678/bot
