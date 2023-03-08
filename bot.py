@@ -16,12 +16,10 @@ INTENTS = Intents.GUILD_MEMBERS | Intents.GUILDS
 
 bot = lightbulb.BotApp(
     token = BOT_TOKEN,
-    intents=INTENTS,
+    intents=hikari.Intents.ALL_UNPRIVILEGED | hikari.Intents.MESSAGE_CONTENT, # Add this to allow bot to access message content
     banner=None,
     default_enabled_guilds = 997729114968555540
 )
-
-# token taken from https://discord.com/developers/applications/997331587966447678/bot
 
 @bot.listen(hikari.StartedEvent) # triggers when bot is started
 async def bot_started(event): # function header
@@ -31,19 +29,19 @@ async def bot_started(event): # function header
 @bot.listen(hikari.MemberCreateEvent)
 async def on_group_join(event):
     print(f'{event.member} has joined the toke space.')
-# @bot.listen()
-# def on_group_join(event: hikari.MemberCreateEvent):
-#     print(f'{event.member} has joined the toke space.')
 
 @bot.listen(hikari.MemberDeleteEvent)
 async def on_group_remove(event):
     print(f'{event.member} has left the toke space.')
 
 
-@bot.listen()
-async def print_message(event: hikari.GuildMessageCreateEvent) -> None:
-    if event.content == "!ping":
-        print(event.message.content)
+@bot.listen(hikari.GuildMessageCreateEvent)
+async def print_message(event):
+    if event.is_human:
+        print(event.content)
+        await bot.rest.create_message(event.channel_id, "Hello, how are you? How may I help you?")
+# https://discord.com/channels/574921006817476608/1079027849899556864/1079028035619127376
+
 #----------------------------
 # Slash Commands
 #----------------------------
@@ -89,11 +87,8 @@ async def add(ctx):
 #----------------------------
 # Plugins and Extensions
 #----------------------------
-
-# load plugin from extensions/example.py
+# load plugins from extensions/example.py
 bot.load_extensions_from('./extensions')
-
-
 
 
 # if __name__ == "__main__":

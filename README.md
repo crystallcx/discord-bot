@@ -1,4 +1,5 @@
 discord bot:
+https://discord.com/developers/applications/
 
 ## Setup:
 - `python3 -m venv env`  # create virtual environment env so modules are not installed across enitre system
