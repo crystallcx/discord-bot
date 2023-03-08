@@ -1,10 +1,18 @@
+import os
 import hikari
 import lightbulb
-import os
+from dotenv import load_dotenv
+
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access environment variables using os.environ.get()
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
 
 # bot = hikari.GatewayBot(token='<TOKEN>')
 bot = lightbulb.BotApp(
-    token = <BOT_TOKEN>,
+    token = BOT_TOKEN,
     default_enabled_guilds=(997729114968555540, 486517628404498432)) # register commands only to specified guild (discord server)
 
 # token taken from https://discord.com/developers/applications/997331587966447678/bot
