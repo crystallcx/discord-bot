@@ -39,7 +39,7 @@ async def on_group_remove(event):
 async def print_message(event):
     if event.is_human:
         print(event.content)
-        await bot.rest.create_message(event.channel_id, "Hello, how are you? How may I help you?")
+        # await bot.rest.create_message(event.channel_id, "Hello, how are you? How may I help you?")
 # https://discord.com/channels/574921006817476608/1079027849899556864/1079028035619127376
 
 #----------------------------

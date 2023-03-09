@@ -7,6 +7,7 @@ https://discord.com/developers/applications/
 ## Requirements:
 - python3.10
 - hikari: `python3 -m pip install -U hikari`
+- tweepy
 - hikari-lightbulb: `pip install hikari-lightbulb`
 
 
@@ -15,6 +16,8 @@ https://discord.com/developers/applications/
 - `python3 bot.py` #start bot
 
 
+## Hikari Documentation
+https://docs.hikari-py.dev/en/latest/reference/hikari/
 
 
 Referred to videos in the following series:
