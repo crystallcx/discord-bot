@@ -1,0 +1,4 @@
+hikari==2.0.0.dev116
+lightbulb==0.1d
+python-dotenv==1.0.0
+tweepy==3.9.0
