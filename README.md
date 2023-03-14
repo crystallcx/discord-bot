@@ -4,6 +4,12 @@ https://discord.com/developers/applications/
 ## Setup:
 - `python3 -m venv env`  # create virtual environment env so modules are not installed across enitre system
 
+Create `.env` file defining variables:
+- TWITTER_CONSUMER_KEY
+- TWITTER_CONSUMER_SECRET
+- TWITTER_ACCESS_TOKEN
+- TWITTER_ACCESS_TOKEN_SECRET
+
 ## Requirements:
 - python3.10
 - hikari: `python3 -m pip install -U hikari`
