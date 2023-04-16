@@ -15,7 +15,7 @@ Create `.env` file defining variables:
 - hikari: `python3 -m pip install -U hikari`
 - tweepy
 - hikari-lightbulb: `pip install hikari-lightbulb`
-
+- dotenv: `python -m pip install python-dotenv`
 
 ## To run:
 - `. env/bin/activate`  # activate virtual environment or source env/bin/activate
