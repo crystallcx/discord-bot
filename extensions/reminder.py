@@ -2,13 +2,13 @@ import hikari
 import lightbulb
 import datetime
 
-plugin = lightbulb.Plugin('Reminders')
+plugin = lightbulb.Plugin('reminders')
 
 def load(bot):
     bot.add_plugin(plugin)
 
 @plugin.command
-@lightbulb.command('Reminders', 'Reminder Group')
+@lightbulb.command('reminders', 'Reminder Group')
 @lightbulb.implements(lightbulb.SlashCommandGroup)
 async def reminders(ctx):
     pass #do nothing

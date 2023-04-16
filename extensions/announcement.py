@@ -3,7 +3,7 @@ import lightbulb
 import datetime
 from typing import Optional
 
-plugin = lightbulb.Plugin('Accouncement')
+plugin = lightbulb.Plugin('announcement')
 
 def load(bot):
     bot.add_plugin(plugin)

@@ -1,3 +1,4 @@
+# echos text sent as command parameter
 import lightbulb
 import hikari
 
